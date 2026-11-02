@@ -1,0 +1,13 @@
+[Unit]
+Description=NotebookLM HTTP MCP Server (FastMCP)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/notebooklm-mcp
+ExecStart=%h/notebooklm-mcp/.venv/bin/python server.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

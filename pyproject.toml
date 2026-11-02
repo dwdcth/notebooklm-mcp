@@ -1,0 +1,12 @@
+[project]
+name = "notebooklm-mcp"
+version = "1.0.0"
+description = "NotebookLM HTTP MCP server (FastMCP) + cookie 更新界面"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "notebooklm-py>=0.8",
+    "fastmcp>=2.10",
+    "rookie-cookies>=0.1",
+]
