@@ -104,8 +104,11 @@ MCP 客户端 ──https──> nginx (your-domain.example) ──> pm2: nlm-mc
 
 > **⚠️ 部署环境需要干净的网络出口。** NotebookLM 有区域/反滥用门禁，会拒绝
 > 数据中心/机房 IP（请求被重定向到营销页并报 `location=unsupported`）。
-> 请部署在住宅级网络或干净的出口 IP 上；若出口受限，可自备代理并在 `.env`
-> 中设置 `HTTPS_PROXY=http://...` 让 Google 请求走代理出去。
+> 实测常见情况：同一台服务器的 **IPv6 出口被拒而 IPv4 出口放行**（系统解析
+> 默认优先 IPv6，导致默认走 v6 被拦）。此时在 `.env` 设
+> `NOTEBOOKLM_IP_PREFER=4` 强制 IPv4 即可，无需代理；v4 也被拒时再考虑
+> 住宅网络/自备代理（`.env` 设 `HTTPS_PROXY=http://...`）。
+> 快速判断: `curl -4 -I https://notebooklm.google.com` 与 `curl -6 -I ...` 对比。
 
 - **MCP 端点**: `https://your-domain.example/nlm-mcp`（Streamable HTTP, `Authorization: Bearer <key>`）
 - **Cookie 界面**: `https://your-domain.example/nlm-ui/?key=<key>`
