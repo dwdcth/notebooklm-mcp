@@ -27,6 +27,8 @@ from typing import Any, Literal, Optional
 from fastmcp import FastMCP, Context
 from fastmcp.server.auth.providers.jwt import StaticTokenVerifier
 
+from ip_prefer import apply as apply_ip_prefer
+
 # ---------------------------------------------------------------- .env
 
 def load_dotenv(path: str = None):
@@ -57,6 +59,7 @@ if not API_KEY:
 
 os.environ.setdefault("NOTEBOOKLM_PROFILE", PROFILE)
 DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
+apply_ip_prefer()   # NOTEBOOKLM_IP_PREFER=4|6: 解析层 IPv4/IPv6 优先
 
 # ---------------------------------------------------------------- 鉴权
 
